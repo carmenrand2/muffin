@@ -7,12 +7,12 @@ let game = {
     upgrades: {
         cursor: {
             id: 'cursor',
-            name: 'Cursor',
+            name: 'Pink Cursor',
             cost: 15,
             baseCost: 15,
             mps: 0.1,
             count: 0,
-            icon: '👆'
+            icon: '👆' // Keeping emoji for cursor for now or use image if generated
         },
         grandma: {
             id: 'grandma',
@@ -21,7 +21,7 @@ let game = {
             baseCost: 100,
             mps: 1,
             count: 0,
-            icon: '👵'
+            icon: 'assets/grandma.png'
         },
         farm: {
             id: 'farm',
@@ -30,25 +30,25 @@ let game = {
             baseCost: 1100,
             mps: 8,
             count: 0,
-            icon: '🚜'
+            icon: 'assets/farm.png'
         },
         bakery: {
             id: 'bakery',
-            name: 'Bakery',
+            name: 'Pink Bakery',
             cost: 12000,
             baseCost: 12000,
             mps: 47,
             count: 0,
-            icon: '🏪'
+            icon: 'assets/bakery.png'
         },
         factory: {
             id: 'factory',
-            name: 'Muffin Factory',
+            name: 'Candy Factory',
             cost: 130000,
             baseCost: 130000,
             mps: 260,
             count: 0,
-            icon: '🏭'
+            icon: 'assets/factory.png'
         }
     }
 };
@@ -132,8 +132,12 @@ function renderUpgrades() {
         item.dataset.id = u.id;
         item.onclick = () => buyUpgrade(u.id);
 
+        const iconContent = u.icon.includes('/')
+            ? `<img src="${u.icon}" alt="${u.name}">`
+            : u.icon;
+
         item.innerHTML = `
-            <div class="upgrade-icon">${u.icon}</div>
+            <div class="upgrade-icon">${iconContent}</div>
             <div class="upgrade-info">
                 <span class="upgrade-name">${u.name}</span>
                 <span class="upgrade-cost">${u.cost} Muffins</span>

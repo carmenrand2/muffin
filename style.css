@@ -1,11 +1,16 @@
 :root {
-    --bg-color: #fdf6e3;
-    --primary-color: #8b4513;
-    --accent-color: #e91e63;
+    --bg-color: #ffe6f2;
+    /* Light pink background */
+    --primary-color: #d81b60;
+    /* Deep pink */
+    --accent-color: #ff4081;
+    /* Bright pink */
     --secondary-bg: #fff0f5;
-    --text-color: #4a3b32;
+    /* Lavender blush */
+    --text-color: #4a0e2e;
+    /* Dark pink/brown text */
     --card-bg: #ffffff;
-    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow: 0 8px 16px rgba(216, 27, 96, 0.15);
 }
 
 * {
@@ -34,8 +39,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, var(--secondary-bg), var(--bg-color));
-    border-right: 2px solid rgba(139, 69, 19, 0.1);
+    background: radial-gradient(circle at center, #fff, var(--bg-color));
+    border-right: 2px solid rgba(216, 27, 96, 0.1);
     position: relative;
 }
 
@@ -46,27 +51,30 @@ body {
 }
 
 #muffin-count {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
 #mps-display {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--accent-color);
     font-weight: 600;
 }
 
 .muffin-btn {
-    font-size: 12rem;
-    background: none;
+    width: 300px;
+    height: 300px;
+    background: url('assets/muffin.png') no-repeat center center;
+    background-size: contain;
     border: none;
     cursor: pointer;
     transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     user-select: none;
     outline: none;
-    filter: drop-shadow(0 10px 20px rgba(139, 69, 19, 0.2));
+    filter: drop-shadow(0 20px 30px rgba(216, 27, 96, 0.3));
 }
 
 .muffin-btn:active {
@@ -79,36 +87,38 @@ body {
 
 /* Right Section - Upgrades */
 .upgrades-section {
-    width: 400px;
+    width: 450px;
     background-color: var(--card-bg);
     padding: 2rem;
     overflow-y: auto;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+    box-shadow: -5px 0 25px rgba(216, 27, 96, 0.1);
+    border-left: 1px solid #ffcce0;
 }
 
 .upgrades-section h2 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     text-align: center;
-    border-bottom: 2px solid var(--secondary-bg);
+    border-bottom: 3px solid var(--secondary-bg);
     padding-bottom: 1rem;
+    font-weight: 800;
 }
 
 .upgrade-item {
     display: flex;
     align-items: center;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: var(--bg-color);
-    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    background-color: #fff;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 2px solid transparent;
+    border: 2px solid #ffe6f2;
 }
 
 .upgrade-item:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow);
     border-color: var(--accent-color);
 }
@@ -117,11 +127,22 @@ body {
     opacity: 0.6;
     cursor: not-allowed;
     filter: grayscale(0.8);
+    background-color: #f9f9f9;
 }
 
 .upgrade-icon {
-    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
     margin-right: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffe6f2;
+}
+
+.upgrade-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .upgrade-info {
@@ -129,28 +150,29 @@ body {
 }
 
 .upgrade-name {
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: 800;
+    font-size: 1.2rem;
     display: block;
+    color: var(--text-color);
 }
 
 .upgrade-cost {
     color: var(--accent-color);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 .upgrade-mps {
-    font-size: 0.8rem;
-    color: #666;
+    font-size: 0.9rem;
+    color: #888;
     display: block;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
 }
 
 .upgrade-count {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: rgba(0,0,0,0.1);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffcce0;
     margin-left: 1rem;
 }
 
@@ -159,10 +181,11 @@ body {
     position: absolute;
     pointer-events: none;
     animation: floatUp 1s ease-out forwards;
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    font-size: 2rem;
     user-select: none;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 @keyframes floatUp {
@@ -170,6 +193,7 @@ body {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-50px) scale(1.2);
