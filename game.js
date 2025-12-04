@@ -7,12 +7,12 @@ export let game = {
     upgrades: {
         cursor: {
             id: 'cursor',
-            name: 'Pink Cursor',
+            name: 'Supermarket Muffins',
             cost: 15,
             baseCost: 15,
             mps: 0.1,
             count: 0,
-            icon: ''
+            icon: 'assets/muffin.png'
         },
         grandma: {
             id: 'grandma',
