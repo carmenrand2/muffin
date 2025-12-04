@@ -12,11 +12,11 @@ let game = {
             baseCost: 15,
             mps: 0.1,
             count: 0,
-            icon: '👆' // Keeping emoji for cursor for now or use image if generated
+            icon: '👆'
         },
         grandma: {
             id: 'grandma',
-            name: 'Grandma',
+            name: 'Home Kitchen',
             cost: 100,
             baseCost: 100,
             mps: 1,
@@ -25,16 +25,16 @@ let game = {
         },
         farm: {
             id: 'farm',
-            name: 'Muffin Farm',
+            name: 'Muffin Stand',
             cost: 1100,
             baseCost: 1100,
             mps: 8,
             count: 0,
-            icon: 'assets/farm.png'
+            icon: 'assets/stand.png'
         },
         bakery: {
             id: 'bakery',
-            name: 'Pink Bakery',
+            name: 'Corner Bakery',
             cost: 12000,
             baseCost: 12000,
             mps: 47,
@@ -43,12 +43,12 @@ let game = {
         },
         factory: {
             id: 'factory',
-            name: 'Candy Factory',
+            name: 'Fancy Patisserie',
             cost: 130000,
             baseCost: 130000,
             mps: 260,
             count: 0,
-            icon: 'assets/factory.png'
+            icon: 'assets/patisserie.png'
         }
     }
 };
@@ -172,12 +172,21 @@ function loadGame() {
     const saveString = localStorage.getItem('muffinClickerSave');
     if (saveString) {
         const savedGame = JSON.parse(saveString);
-        // Merge saved data with current game structure to handle updates
-        game = { ...game, ...savedGame };
 
-        // Re-initialize upgrades object to ensure methods/structure are correct if needed
-        // (In this simple object case, direct merge is mostly fine, but let's be safe about missing new keys)
-        // For now, direct merge is okay as we haven't changed structure.
+        // Restore global counters
+        if (savedGame.muffins !== undefined) game.muffins = savedGame.muffins;
+        if (savedGame.totalMuffins !== undefined) game.totalMuffins = savedGame.totalMuffins;
+        if (savedGame.startTime !== undefined) game.startTime = savedGame.startTime;
+
+        // Restore upgrade counts and costs, but keep new names/icons from code
+        if (savedGame.upgrades) {
+            for (let key in game.upgrades) {
+                if (savedGame.upgrades[key]) {
+                    game.upgrades[key].count = savedGame.upgrades[key].count;
+                    game.upgrades[key].cost = savedGame.upgrades[key].cost;
+                }
+            }
+        }
 
         recalculateMPS();
         updateDisplay();
