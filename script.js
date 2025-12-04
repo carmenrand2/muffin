@@ -110,7 +110,7 @@ setInterval(() => {
 function updateDisplay() {
     muffinCountDisplay.textContent = `${Math.floor(game.muffins)} Muffins`;
     mpsDisplay.textContent = `per second: ${game.mps.toFixed(1)}`;
-    
+
     // Update upgrade buttons availability
     document.querySelectorAll('.upgrade-item').forEach(item => {
         const id = item.dataset.id;
@@ -131,7 +131,7 @@ function renderUpgrades() {
         item.className = `upgrade-item ${game.muffins >= u.cost ? '' : 'disabled'}`;
         item.dataset.id = u.id;
         item.onclick = () => buyUpgrade(u.id);
-        
+
         item.innerHTML = `
             <div class="upgrade-icon">${u.icon}</div>
             <div class="upgrade-info">
@@ -152,13 +152,43 @@ function createParticle(x, y, text) {
     particle.style.left = `${x}px`;
     particle.style.top = `${y}px`;
     document.body.appendChild(particle);
-    
+
     setTimeout(() => {
         particle.remove();
     }, 1000);
 }
 
+// Save/Load System
+function saveGame() {
+    const saveString = JSON.stringify(game);
+    localStorage.setItem('muffinClickerSave', saveString);
+}
+
+function loadGame() {
+    const saveString = localStorage.getItem('muffinClickerSave');
+    if (saveString) {
+        const savedGame = JSON.parse(saveString);
+        // Merge saved data with current game structure to handle updates
+        game = { ...game, ...savedGame };
+
+        // Re-initialize upgrades object to ensure methods/structure are correct if needed
+        // (In this simple object case, direct merge is mostly fine, but let's be safe about missing new keys)
+        // For now, direct merge is okay as we haven't changed structure.
+
+        recalculateMPS();
+        updateDisplay();
+        renderUpgrades();
+    }
+}
+
+// Auto-save every 30 seconds
+setInterval(saveGame, 30000);
+
 // Initialization
 muffinBtn.addEventListener('click', clickMuffin);
+loadGame(); // Load save on startup
 renderUpgrades();
 updateDisplay();
+
+// Save before closing
+window.addEventListener('beforeunload', saveGame);
